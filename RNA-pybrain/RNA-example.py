@@ -34,7 +34,6 @@ nX1 = n.normalize01(x1)
 nY1 = n.normalize01(y1)
 
 for i in range(len(nX1)):
-    print (i)
     ds.addSample((nX1[i]),(nY1[i]))
 
 nn = buildNetwork(ds.indim,30,ds.outdim, hiddenclass=TanhLayer, bias=True) 
