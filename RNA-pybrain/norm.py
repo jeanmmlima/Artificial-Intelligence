@@ -43,5 +43,5 @@ def normalize11(v):
 def deNormalize11(nV,v):
     minVal = np.min(v)
     maxVal = np.max(v)
-    deNormalizedData = minVal + (nV * (maxVal - minVal))/2
+    deNormalizedData = minVal + ((nV * (maxVal - minVal))/2.0)
     return deNormalizedData

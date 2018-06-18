@@ -10,32 +10,48 @@ from pybrain.tools.shortcuts import buildNetwork
 from pybrain.datasets import SupervisedDataSet
 from pybrain.supervised.trainers import BackpropTrainer
 
+from pybrain.structure import TanhLayer
+
 
 import numpy as np
+import norm as n
 
 ds = SupervisedDataSet(1,1)
 
-x1 = range(13)
+x1 = range(100)
 x1 = np.array(x1)
-y1 = x1*x1
+y1 = x1+x1
 
-for i in range(len(x1)):
+#parametros
+epocas = 100
+
+#normalizacao
+maxX1 = np.max(x1)
+minX1 = np.min(x1)
+maxY1 = np.max(y1)
+minY1 = np.min(y1)
+nX1 = n.normalize01(x1)
+nY1 = n.normalize01(y1)
+
+for i in range(len(nX1)):
     print (i)
-    ds.addSample((x1[i]),(y1[i]))
+    ds.addSample((nX1[i]),(nY1[i]))
 
-#ds.addSample((0.0,0.0),(0.0))
-#ds.addSample((1.0,0.0),(1.0))
-#ds.addSample((2.0,0.0),(4.0))
+nn = buildNetwork(ds.indim,30,ds.outdim, hiddenclass=TanhLayer, bias=True) 
 
-#ds.addSample((0.5,0.7),(0.5))
-#ds.addSample((1.0,0.8),(0.95))
+trainer = BackpropTrainer(nn,ds,0.1,1)
 
-nn = buildNetwork(ds.indim,3,ds.outdim, bias=True)
-
-trainer = BackpropTrainer(nn,ds)
-
-for i in range(2000):
+for i in range(epocas):
     print(trainer.train())
+    
+#teste
+    
+valor = ([5.5])
+nV = n.normalize4Test(valor,minX1,maxX1)
+
+res = nn.activate(nV)
+
+dRes = n.deNormalize4Test(res,valor,minY1,maxY1)
     
 
 
