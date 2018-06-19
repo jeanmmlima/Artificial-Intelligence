@@ -23,7 +23,7 @@ x1 = np.array(x1)
 y1 = x1+x1
 
 #parametros
-epocas = 100
+epocas = 200
 
 #normalizacao
 maxX1 = np.max(x1)
@@ -36,12 +36,13 @@ nY1 = n.normalize01(y1)
 for i in range(len(nX1)):
     ds.addSample((nX1[i]),(nY1[i]))
 
-nn = buildNetwork(ds.indim,30,ds.outdim, hiddenclass=TanhLayer, bias=True) 
+nn = buildNetwork(ds.indim,33,ds.outdim, hiddenclass=TanhLayer, bias=True) 
 
 trainer = BackpropTrainer(nn,ds,0.1,1)
 
 for i in range(epocas):
     print(trainer.train())
+#trainer.trainUntilConvergence()
     
 #teste
     
