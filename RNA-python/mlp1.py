@@ -8,6 +8,9 @@ Created on Sat Oct 13 12:05:02 2018
 
 import numpy as np
 
+#MULTILAYER PERCEPTRON
+
+
 #Fuções de Ativação
 
 #Valores entre 0 e 1
@@ -27,17 +30,18 @@ inputs = np.array([[0,0],[0,1],[1,0],[1,1]])
 targets = np.array([0,1,1,0])
 
 #wIn = np.array([[-0.424,0.358],[-0.74,-0.577],[-0.961,-0.469]])
-wIn = np.array([[-0.424, -0.74, -0.961],[0.385, -0.577, -0.469]])
+wIn = np.array([[-0.424, -0.74, -0.961],[0.358, -0.577, -0.469]])
 wOut = np.array([-0.017,-0.893,0.148])
 
 epochs = 100
 
 for j in range(epochs):
-    
+    InLayer = inputs
+    sumSinapse0 = np.dot(layerIn, wIn)
+    HiddenLayer = sigmoide(sumSinapse0)
 
 
 
 
 
 #feedforward
-    
