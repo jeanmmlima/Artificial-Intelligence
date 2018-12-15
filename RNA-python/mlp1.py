@@ -17,6 +17,10 @@ import numpy as np
 def sigmoide(x):
     return 1 / (1 + np.exp(-x))
 
+#derivada
+def sigmoideDerivada(sig):
+    return sig * (1-sig)
+
 #Valores entre -1 e 1
 def hyperbolicTang(x):
     return ((np.e - np.exp(-x))/(np.e + np.exp(-x)))
@@ -39,6 +43,12 @@ for j in range(epochs):
     InLayer = inputs
     sumSinapse0 = np.dot(layerIn, wIn)
     HiddenLayer = sigmoide(sumSinapse0)
+    sumSinapse1 = np.dot(HiddenLayer, wOut)
+    OutLayer = sigmoide(sumSinapse1)
+    
+    error = abs(targets - OutLayer)
+    meanError = np.mean(error)
+    
 
 
 
