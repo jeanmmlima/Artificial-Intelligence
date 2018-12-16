@@ -41,13 +41,25 @@ epochs = 100
 
 for j in range(epochs):
     InLayer = inputs
-    sumSinapse0 = np.dot(layerIn, wIn)
+    sumSinapse0 = np.dot(InLayer, wIn)
     HiddenLayer = sigmoide(sumSinapse0)
     sumSinapse1 = np.dot(HiddenLayer, wOut)
     OutLayer = sigmoide(sumSinapse1)
     
-    error = abs(targets - OutLayer)
+    error = targets - OutLayer
     meanError = np.mean(error)
+    meanAbs = np.mean(np.abs(error))
+    
+    ##Calculo do delta - Saida
+    
+    deltaOut = error * sigmoideDerivada(OutLayer)
+    
+    ##Calculo delta - Hidden Layer
+    
+    wOutT = wOut.T
+    deltaOutxPesos = deltaOut.dot(wOutT)
+    deltaHL =  deltaOutxPesos * sigmoideDerivada(HiddenLayer)
+    
     
 
 
