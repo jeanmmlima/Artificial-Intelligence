@@ -31,13 +31,15 @@ def getOuts(_inputs, _weight):
 
 #PORTA XOR --> NÃO LINEARMENTE SEPARAVEL
 inputs = np.array([[0,0],[0,1],[1,0],[1,1]])
-targets = np.array([0,1,1,0])
+targets = np.array([[0],[1],[1],[0]])
 
 #wIn = np.array([[-0.424,0.358],[-0.74,-0.577],[-0.961,-0.469]])
 wIn = np.array([[-0.424, -0.74, -0.961],[0.358, -0.577, -0.469]])
-wOut = np.array([-0.017,-0.893,0.148])
+wOut = np.array([[-0.017],[-0.893],[0.148]])
 
 epochs = 100
+learning_rate = 0.3
+momentum = 1
 
 for j in range(epochs):
     InLayer = inputs
@@ -55,10 +57,17 @@ for j in range(epochs):
     deltaOut = error * sigmoideDerivada(OutLayer)
     
     ##Calculo delta - Hidden Layer
+    # DELTA HL = pesos * Delta da Saída * Derivada da Sigmoide.
     
     wOutT = wOut.T
     deltaOutxPesos = deltaOut.dot(wOutT)
     deltaHL =  deltaOutxPesos * sigmoideDerivada(HiddenLayer)
+    
+    # BACKPROP
+    
+    ## peso (n+1) = (peso(n) * momento) + (entrada * delta * taxaAprendizagem)
+    
+    
     
     
 
