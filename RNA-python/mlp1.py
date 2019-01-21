@@ -42,6 +42,9 @@ learning_rate = 0.3
 momentum = 1
 
 for j in range(epochs):
+    
+    ##### FEED FORWARD ####
+    
     InLayer = inputs
     sumSinapse0 = np.dot(InLayer, wIn)
     HiddenLayer = sigmoide(sumSinapse0)
@@ -63,9 +66,23 @@ for j in range(epochs):
     deltaOutxPesos = deltaOut.dot(wOutT)
     deltaHL =  deltaOutxPesos * sigmoideDerivada(HiddenLayer)
     
-    # BACKPROP
+    #### BACKPROP #####
     
     ## peso (n+1) = (peso(n) * momento) + (entrada * delta * taxaAprendizagem)
+    
+    ## SAIDA -> CAMADA OCULTA
+    
+    
+    HiddenLayerT = HiddenLayer.T
+    nWOut = HiddenLayerT.dot(deltaOut)
+    wOut = (wOut * momentum) + (nWOut * learning_rate)
+    
+    ## CAMADA OCULTA -> ENTRADA
+    
+    InLayerT = InLayer.T
+    nWIn = InLayerT.dot(deltaHL)
+    wIn = (wIn * momentum) + (nWIn * learning_rate)
+    
     
     
     
