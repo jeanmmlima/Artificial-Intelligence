@@ -34,11 +34,18 @@ inputs = np.array([[0,0],[0,1],[1,0],[1,1]])
 targets = np.array([[0],[1],[1],[0]])
 
 #wIn = np.array([[-0.424,0.358],[-0.74,-0.577],[-0.961,-0.469]])
-wIn = np.array([[-0.424, -0.74, -0.961],[0.358, -0.577, -0.469]])
-wOut = np.array([[-0.017],[-0.893],[0.148]])
+#wIn = np.array([[-0.424, -0.74, -0.961],[0.358, -0.577, -0.469]])
+#wOut = np.array([[-0.017],[-0.893],[0.148]])
 
-epochs = 100
-learning_rate = 0.3
+#2linhas 3 colunas - 2 entradas 3 neuronios na camada oculta
+#valores entre -1 e 1
+wIn = 2*np.random.random((2,3))-1
+
+#3 linhas 1 coluna - 3 neuronios na camada oculta 1 na saída
+wOut = 2*np.random.random((3,1))-1
+
+epochs = 1000000
+learning_rate = 0.6
 momentum = 1
 
 for j in range(epochs):
@@ -54,6 +61,7 @@ for j in range(epochs):
     error = targets - OutLayer
     meanError = np.mean(error)
     meanAbs = np.mean(np.abs(error))
+    print("Erro: "+str(meanAbs))
     
     ##Calculo do delta - Saida
     
