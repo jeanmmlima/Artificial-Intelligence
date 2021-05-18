@@ -1,0 +1,49 @@
+[System]
+Name='Fuzzy'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=9
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='setpoint'
+Range=[0 30]
+NumMFs=3
+MF1='SPP':'trimf',[-1.32876666666666 6.65133333333334 14.6333333333333]
+MF2='SPM':'trimf',[10.63 15 19.37]
+MF3='SPG':'trimf',[15.3090476190476 24.6090476190476 33.9090476190476]
+
+[Input2]
+Name='nivel2'
+Range=[0 30]
+NumMFs=3
+MF1='NP':'trimf',[-3.0615873015873 5.7784126984127 14.6184126984127]
+MF2='NM':'trimf',[11.11 15 18.89]
+MF3='NG':'trimf',[15.4165079365079 25.2965079365079 35.1765079365079]
+
+[Output1]
+Name='sinal-controle'
+Range=[0 4]
+NumMFs=5
+MF1='SCN':'trimf',[-4.052 0.746 1.58]
+MF2='SCZP':'trimf',[1.191 1.691 2.191]
+MF3='SCZM':'trimf',[1.9 2.4 2.9]
+MF4='SCZG':'trimf',[2.324 2.824 3.324]
+MF5='SCP':'trimf',[3.07 3.307 8.053]
+
+[Rules]
+3 3, 4 (1) : 1
+3 2, 5 (1) : 1
+3 1, 5 (1) : 1
+2 3, 1 (1) : 1
+2 2, 3 (1) : 1
+2 1, 5 (1) : 1
+1 3, 1 (1) : 1
+1 2, 1 (1) : 1
+1 1, 2 (1) : 1
