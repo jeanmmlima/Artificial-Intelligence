@@ -1,2 +1,2 @@
 # Artificial-Intelligence
-Folder keeps AI projects
+AI projects: Search methods, fuzzy logic, meta-heuristics and machine learning. 
